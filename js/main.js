@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-=======
-// main.js -> navegação, toasts e inicialização
->>>>>>> a344b54 (primeiras alteraçoes)
+// main.js — navegação, toasts e inicialização global
+
 const links = document.querySelectorAll(".sidebar a");
 const sections = document.querySelectorAll(".content");
 
+// ======== NAVEGAÇÃO ENTRE SEÇÕES ========
 links.forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
@@ -14,49 +13,65 @@ links.forEach(link => {
     document.getElementById(link.dataset.section).classList.add("active");
   });
 });
-<<<<<<< HEAD
-=======
 
-// Função toast global
+// ======== TOAST (mensagem temporária) ========
 function toast(msg) {
-  const div = document.createElement('div');
-  div.className = 'toast';
+  const div = document.createElement("div");
+  div.className = "toast";
   div.textContent = msg;
+  Object.assign(div.style, {
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    background: "var(--cor-primaria)",
+    color: "#fff",
+    padding: "10px 15px",
+    borderRadius: "8px",
+    zIndex: "9999",
+    fontWeight: "bold",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+    opacity: "0",
+    transition: "opacity 0.3s",
+  });
   document.body.appendChild(div);
-  setTimeout(() => div.remove(), 3000);
+  setTimeout(() => (div.style.opacity = "1"), 100);
+  setTimeout(() => {
+    div.style.opacity = "0";
+    setTimeout(() => div.remove(), 300);
+  }, 3000);
 }
-window.toast = toast; // expor globalmente
+window.toast = toast; // disponível globalmente
 
-// Inicialização ao carregar a página
-document.addEventListener('DOMContentLoaded', () => {
-  // inicializa dados carregando de cada módulo
-  if (typeof carregarClientes === 'function') carregarClientes();
-  if (typeof carregarCardapio === 'function') carregarCardapio();
-  if (typeof carregarEstoque === 'function') carregarEstoque();
-  if (typeof carregarHistorico === 'function') carregarHistorico();
-  if (typeof carregarPedidosEmAndamento === 'function') carregarPedidosEmAndamento();
+// ======== INICIALIZAÇÃO GLOBAL ========
+document.addEventListener("DOMContentLoaded", () => {
+  // Carregar dados de todos os módulos, se existirem
+  if (typeof carregarClientes === "function") carregarClientes();
+  if (typeof carregarCardapio === "function") carregarCardapio();
+  if (typeof carregarEstoque === "function") carregarEstoque();
+  if (typeof carregarHistorico === "function") carregarHistorico();
+  if (typeof carregarPedidosEmAndamento === "function") carregarPedidosEmAndamento();
 
-  // atualizar selects (caso cardápio já carregado)
-  if (typeof atualizarSelectsCardapio === 'function') atualizarSelectsCardapio();
+  // Atualiza selects de pedido (pizza/bebida/adicional)
+  if (typeof atualizarSelectsCardapio === "function") atualizarSelectsCardapio();
 
-  // export CSV botão (historico)
-  const exportBtn = document.getElementById('exportCsv');
+  // Exportar histórico CSV
+  const exportBtn = document.getElementById("exportCsv");
   if (exportBtn) {
-    exportBtn.addEventListener('click', () => {
-      if (typeof exportarHistoricoCSV === 'function') exportarHistoricoCSV();
+    exportBtn.addEventListener("click", () => {
+      if (typeof exportarHistoricoCSV === "function") exportarHistoricoCSV();
     });
   }
 
-  const limparHistBtn = document.getElementById('limparHistorico');
+  // Limpar histórico
+  const limparHistBtn = document.getElementById("limparHistorico");
   if (limparHistBtn) {
-    limparHistBtn.addEventListener('click', () => {
-      if (typeof limparHistorico === 'function') {
-        if (confirm('Deseja realmente limpar o histórico do dia?')) {
+    limparHistBtn.addEventListener("click", () => {
+      if (typeof limparHistorico === "function") {
+        if (confirm("Deseja realmente limpar o histórico do dia?")) {
           limparHistorico();
-          toast('Histórico limpo');
+          toast("Histórico limpo!");
         }
       }
     });
   }
 });
->>>>>>> a344b54 (primeiras alteraçoes)

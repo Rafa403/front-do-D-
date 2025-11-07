@@ -10,13 +10,8 @@
   <div class="sidebar">
     <h2>🍕 D+ Pizzas</h2>
     <a href="#" class="active" data-section="inicio">Início (Pedidos)</a>
-<<<<<<< HEAD
-    <a href="#" data-section="clientes">Clientes Vitalícios</a>
-    <a href="#" data-section="historico">Histórico do Dia</a>
-=======
     <a href="#" data-section="clientes">Clientes</a>
     <a href="#" data-section="historico">Histórico</a>
->>>>>>> a344b54 (primeiras alteraçoes)
     <a href="#" data-section="cardapio">Cardápio</a>
     <a href="#" data-section="estoque">Estoque</a>
   </div>
@@ -25,14 +20,6 @@
     <!-- PEDIDOS -->
     <section id="inicio" class="content active">
       <h1>Pedidos</h1>
-<<<<<<< HEAD
-      <div class="pedido-opcoes">
-        <button id="btnCadastrado">Cliente Cadastrado</button>
-        <button id="btnNaoCadastrado">Cliente Não Cadastrado</button>
-      </div>
-
-      <form id="formPedido">
-=======
 
       <div class="pedido-opcoes">
         <button id="btnCadastrado" type="button">Cliente Cadastrado</button>
@@ -41,7 +28,6 @@
 
       <form id="formPedido">
         <!-- CLIENTE CADASTRADO -->
->>>>>>> a344b54 (primeiras alteraçoes)
         <div id="clienteCadastrado" class="pedido-grupo">
           <label>CPF do Cliente:</label>
           <input type="text" id="cpfBusca" placeholder="Digite o CPF" />
@@ -49,10 +35,7 @@
           <div id="dadosCliente"></div>
         </div>
 
-<<<<<<< HEAD
-=======
         <!-- CLIENTE NÃO CADASTRADO -->
->>>>>>> a344b54 (primeiras alteraçoes)
         <div id="clienteNaoCadastrado" class="pedido-grupo" style="display: none;">
           <label>Nome:</label>
           <input type="text" id="nomePedido" placeholder="Nome do cliente" />
@@ -63,14 +46,8 @@
         </div>
 
         <h3>Pedido:</h3>
+
         <label>Pizza:</label>
-<<<<<<< HEAD
-        <input type="text" id="pizzaPedido" placeholder="Sabores da pizza" required />
-        <label>Bebida:</label>
-        <input type="text" id="bebidaPedido" placeholder="Bebidas (opcional)" />
-        <label>Adicionais:</label>
-        <input type="text" id="adicionalPedido" placeholder="Borda recheada, extra queijo..." />
-=======
         <select id="pizzaPedido" required>
           <option value="">-- Selecione uma pizza --</option>
         </select>
@@ -84,7 +61,6 @@
         <select id="adicionalPedido" multiple></select>
 
         <h4>Total: R$ <span id="totalPedido">0.00</span></h4>
->>>>>>> a344b54 (primeiras alteraçoes)
         <button type="submit">Registrar Pedido</button>
       </form>
 
@@ -94,11 +70,7 @@
 
     <!-- CLIENTES -->
     <section id="clientes" class="content">
-<<<<<<< HEAD
-      <h1>Cadastro de Clientes Vitalícios</h1>
-=======
       <h1>Cadastro de Clientes</h1>
->>>>>>> a344b54 (primeiras alteraçoes)
       <form id="formCliente">
         <input type="text" id="nomeCliente" placeholder="Nome" required />
         <input type="text" id="cpfCliente" placeholder="CPF" required />
@@ -111,28 +83,14 @@
 
     <!-- HISTÓRICO -->
     <section id="historico" class="content">
-<<<<<<< HEAD
-      <h1>Histórico de Pedidos do Dia</h1>
-      <ul id="listaHistorico"></ul>
-=======
       <h1>Histórico de Pedidos</h1>
       <ul id="listaHistorico"></ul>
       <button id="exportCsv">Exportar CSV</button>
       <button id="limparHistorico">Limpar Histórico</button>
->>>>>>> a344b54 (primeiras alteraçoes)
     </section>
 
     <!-- CARDÁPIO -->
     <section id="cardapio" class="content">
-<<<<<<< HEAD
-      <h1>Sabores e Valores das Pizzas</h1>
-      <form id="formPizza">
-        <input type="text" id="saborPizza" placeholder="Sabor" required />
-        <input type="number" id="valorPizza" placeholder="Valor (R$)" required />
-        <button type="submit">Adicionar</button>
-      </form>
-      <ul id="listaPizzas"></ul>
-=======
       <h1>Cardápio</h1>
       <div class="grid-cardapio">
         <form id="formPizza">
@@ -159,16 +117,11 @@
           <ul id="listaAdicionais"></ul>
         </form>
       </div>
->>>>>>> a344b54 (primeiras alteraçoes)
     </section>
 
     <!-- ESTOQUE -->
     <section id="estoque" class="content">
-<<<<<<< HEAD
-      <h1>Estoque de Ingredientes</h1>
-=======
       <h1>Estoque</h1>
->>>>>>> a344b54 (primeiras alteraçoes)
       <form id="formIngrediente">
         <input type="text" id="nomeIngrediente" placeholder="Ingrediente" required />
         <input type="number" id="qtdIngrediente" placeholder="Quantidade" required />
@@ -180,17 +133,10 @@
 
   <!-- Scripts -->
   <script src="js/clientes.js"></script>
-<<<<<<< HEAD
-  <script src="js/pedidos.js"></script>
-  <script src="js/cardapio.js"></script>
-  <script src="js/estoque.js"></script>
-  <script src="js/historico.js"></script>
-=======
   <script src="js/cardapio.js"></script>
   <script src="js/estoque.js"></script>
   <script src="js/historico.js"></script>
   <script src="js/pedidos.js"></script>
->>>>>>> a344b54 (primeiras alteraçoes)
   <script src="js/main.js"></script>
 </body>
 </html>
