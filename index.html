@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D+ Pizzas - Sistema de Gestão</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="sidebar">
+    <h2>🍕 D+ Pizzas</h2>
+    <a href="#" class="active" data-section="inicio">Início (Pedidos)</a>
+    <a href="#" data-section="clientes">Clientes Vitalícios</a>
+    <a href="#" data-section="historico">Histórico do Dia</a>
+    <a href="#" data-section="cardapio">Cardápio</a>
+    <a href="#" data-section="estoque">Estoque</a>
+  </div>
+
+  <div class="main">
+    <!-- PEDIDOS -->
+    <section id="inicio" class="content active">
+      <h1>Pedidos</h1>
+      <div class="pedido-opcoes">
+        <button id="btnCadastrado">Cliente Cadastrado</button>
+        <button id="btnNaoCadastrado">Cliente Não Cadastrado</button>
+      </div>
+
+      <form id="formPedido">
+        <div id="clienteCadastrado" class="pedido-grupo">
+          <label>CPF do Cliente:</label>
+          <input type="text" id="cpfBusca" placeholder="Digite o CPF" />
+          <button type="button" id="buscarCliente">Buscar</button>
+          <div id="dadosCliente"></div>
+        </div>
+
+        <div id="clienteNaoCadastrado" class="pedido-grupo" style="display: none;">
+          <label>Nome:</label>
+          <input type="text" id="nomePedido" placeholder="Nome do cliente" />
+          <label>Endereço:</label>
+          <input type="text" id="enderecoPedido" placeholder="Endereço" />
+          <label>Telefone:</label>
+          <input type="text" id="telefonePedido" placeholder="Telefone" />
+        </div>
+
+        <h3>Pedido:</h3>
+        <label>Pizza:</label>
+        <input type="text" id="pizzaPedido" placeholder="Sabores da pizza" required />
+        <label>Bebida:</label>
+        <input type="text" id="bebidaPedido" placeholder="Bebidas (opcional)" />
+        <label>Adicionais:</label>
+        <input type="text" id="adicionalPedido" placeholder="Borda recheada, extra queijo..." />
+        <button type="submit">Registrar Pedido</button>
+      </form>
+
+      <h2>Pedidos em andamento</h2>
+      <div id="listaPedidos"></div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section id="clientes" class="content">
+      <h1>Cadastro de Clientes Vitalícios</h1>
+      <form id="formCliente">
+        <input type="text" id="nomeCliente" placeholder="Nome" required />
+        <input type="text" id="cpfCliente" placeholder="CPF" required />
+        <input type="text" id="telefoneCliente" placeholder="Telefone" required />
+        <input type="text" id="enderecoCliente" placeholder="Endereço" required />
+        <button type="submit">Cadastrar</button>
+      </form>
+      <ul id="listaClientes"></ul>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section id="historico" class="content">
+      <h1>Histórico de Pedidos do Dia</h1>
+      <ul id="listaHistorico"></ul>
+    </section>
+
+    <!-- CARDÁPIO -->
+    <section id="cardapio" class="content">
+      <h1>Sabores e Valores das Pizzas</h1>
+      <form id="formPizza">
+        <input type="text" id="saborPizza" placeholder="Sabor" required />
+        <input type="number" id="valorPizza" placeholder="Valor (R$)" required />
+        <button type="submit">Adicionar</button>
+      </form>
+      <ul id="listaPizzas"></ul>
+    </section>
+
+    <!-- ESTOQUE -->
+    <section id="estoque" class="content">
+      <h1>Estoque de Ingredientes</h1>
+      <form id="formIngrediente">
+        <input type="text" id="nomeIngrediente" placeholder="Ingrediente" required />
+        <input type="number" id="qtdIngrediente" placeholder="Quantidade" required />
+        <button type="submit">Adicionar/Atualizar</button>
+      </form>
+      <ul id="listaEstoque"></ul>
+    </section>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/clientes.js"></script>
+  <script src="js/pedidos.js"></script>
+  <script src="js/cardapio.js"></script>
+  <script src="js/estoque.js"></script>
+  <script src="js/historico.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

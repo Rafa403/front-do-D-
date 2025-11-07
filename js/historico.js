@@ -1,0 +1,1 @@
+const listaHistorico = document.getElementById("listaHistorico");
