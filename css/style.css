@@ -6,6 +6,7 @@
   --cor-borda: #2c2c2c;
 }
 
+<<<<<<< HEAD
 * {
   margin: 0;
   padding: 0;
@@ -13,11 +14,17 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+=======
+>>>>>>> a344b54 (primeiras alteraçoes)
 body {
   display: flex;
   height: 100vh;
   background: var(--cor-fundo);
   color: var(--cor-texto);
+<<<<<<< HEAD
+=======
+  font-family: 'Segoe UI', sans-serif;
+>>>>>>> a344b54 (primeiras alteraçoes)
 }
 
 /* Sidebar */
@@ -34,7 +41,10 @@ body {
   text-align: center;
   color: var(--cor-primaria);
   margin-bottom: 30px;
+<<<<<<< HEAD
   font-size: 22px;
+=======
+>>>>>>> a344b54 (primeiras alteraçoes)
 }
 
 .sidebar a {
@@ -55,9 +65,15 @@ body {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
+<<<<<<< HEAD
   background: var(--cor-fundo);
 }
 
+=======
+}
+
+/* Exibe apenas a seção ativa */
+>>>>>>> a344b54 (primeiras alteraçoes)
 .content {
   display: none;
 }
@@ -68,9 +84,15 @@ body {
 
 h1, h2, h3 {
   color: var(--cor-primaria);
+<<<<<<< HEAD
   margin-bottom: 10px;
 }
 
+=======
+}
+
+/* Formulários e inputs */
+>>>>>>> a344b54 (primeiras alteraçoes)
 form {
   margin-bottom: 20px;
   background: var(--cor-fundo-secundario);
@@ -79,7 +101,11 @@ form {
   border: 1px solid var(--cor-borda);
 }
 
+<<<<<<< HEAD
 input, button {
+=======
+input, select, button {
+>>>>>>> a344b54 (primeiras alteraçoes)
   width: 100%;
   padding: 10px;
   margin: 6px 0;
@@ -88,7 +114,11 @@ input, button {
   font-size: 15px;
 }
 
+<<<<<<< HEAD
 input {
+=======
+input, select {
+>>>>>>> a344b54 (primeiras alteraçoes)
   background: #2a2a2a;
   color: var(--cor-texto);
 }
@@ -104,6 +134,7 @@ button:hover {
   filter: brightness(1.2);
 }
 
+<<<<<<< HEAD
 /* Listas */
 ul {
   list-style: none;
@@ -118,12 +149,68 @@ ul li {
 }
 
 /* Pedidos */
+=======
+/* Grid do cardápio */
+.grid-cardapio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* ======== BOTÕES DE REMOVER (X pequeno no canto) ======== */
+.btn-remove {
+  background: transparent;
+  color: #aaa;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-remove:hover {
+  color: #fff;
+  background: var(--cor-primaria);
+  transform: scale(1.1);
+}
+
+/* ======== LISTAS ======== */
+ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--cor-fundo-secundario);
+  border: 1px solid var(--cor-borda);
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+ul li span {
+  color: var(--cor-texto);
+  font-size: 15px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ======== BOTÕES DE CLIENTE ======== */
+>>>>>>> a344b54 (primeiras alteraçoes)
 .pedido-opcoes {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
 }
 
+<<<<<<< HEAD
 .pedido-grupo label {
   display: block;
   margin-top: 10px;
@@ -134,4 +221,22 @@ ul li {
   margin-top: 5px;
   font-style: italic;
   color: #aaa;
+=======
+.pedido-opcoes button {
+  flex: 1;
+  background: #2a2a2a;
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pedido-opcoes button:hover,
+.pedido-opcoes button.active {
+  background: var(--cor-primaria);
+  color: white;
+>>>>>>> a344b54 (primeiras alteraçoes)
 }
