@@ -18,7 +18,7 @@ if (btnCadastrado) btnCadastrado.type = "button";
 if (btnNaoCadastrado) btnNaoCadastrado.type = "button";
 if (btnBuscar) btnBuscar.type = "button";
 
-// Função de alternância visual entre cliente cadastrado/não cadastrado
+// ======== Alternância de cliente ========
 function aplicarModoCliente() {
   if (modoCadastrado) {
     divCadastrado.style.display = "block";
@@ -33,7 +33,6 @@ function aplicarModoCliente() {
   }
 }
 
-// Alternar modo
 btnCadastrado?.addEventListener("click", () => {
   modoCadastrado = true;
   aplicarModoCliente();
@@ -43,7 +42,7 @@ btnNaoCadastrado?.addEventListener("click", () => {
   aplicarModoCliente();
 });
 
-// Buscar cliente cadastrado pelo CPF
+// ======== Buscar cliente pelo CPF ========
 btnBuscar?.addEventListener("click", () => {
   const cpf = document.getElementById("cpfBusca").value.trim();
   const cliente = window.clientes?.find(c => c.cpf === cpf);
@@ -52,7 +51,7 @@ btnBuscar?.addEventListener("click", () => {
     : "Cliente não encontrado!";
 });
 
-// Salvar e carregar pedidos
+// ======== Pedidos em andamento ========
 function salvarPedidosEmAndamento() {
   localStorage.setItem("pedidosEmAndamento", JSON.stringify(window.pedidosEmAndamento));
 }
@@ -61,7 +60,7 @@ function carregarPedidosEmAndamento() {
   renderizarPedidosEmAndamento();
 }
 
-// Calcular total do pedido dinamicamente
+// ======== Calcular total ========
 function calcularTotal() {
   const pizzaIdx = document.getElementById("pizzaPedido")?.value;
   const bebidaIdx = document.getElementById("bebidaPedido")?.value;
@@ -83,7 +82,7 @@ function calcularTotal() {
   document.getElementById(id)?.addEventListener("change", calcularTotal);
 });
 
-// Registrar pedido
+// ======== Registrar pedido ========
 formPedido?.addEventListener("submit", e => {
   e.preventDefault();
 
@@ -108,18 +107,18 @@ formPedido?.addEventListener("submit", e => {
     clienteInfo = `${nome} - ${end} - ${tel}`;
   }
 
-  const pizzaIndex = document.getElementById("pizzaPedido").value;
-  const pizzaObj = pizzaIndex ? window.pizzas?.[pizzaIndex] : null;
-  const pizza = pizzaObj ? `${pizzaObj.sabor} - R$ ${Number(pizzaObj.valor).toFixed(2)}` : "-";
-
-  const bebidaIndex = document.getElementById("bebidaPedido").value;
-  const bebidaObj = bebidaIndex ? window.bebidas?.[bebidaIndex] : null;
-  const bebida = bebidaObj ? `${bebidaObj.nome} - R$ ${Number(bebidaObj.valor).toFixed(2)}` : "-";
-
+  // Índices numéricos dos selects
+  const pizzaIndexNum = Number(document.getElementById("pizzaPedido").value);
+  const bebidaIndexNum = Number(document.getElementById("bebidaPedido").value);
   const adicionaisSelIdx = Array.from(document.getElementById("adicionalPedido").selectedOptions).map(
     o => Number(o.value)
   );
+
+  // Dados do cardápio
+  const pizzaObj = window.pizzas[pizzaIndexNum] || null;
+  const bebidaObj = window.bebidas[bebidaIndexNum] || null;
   const adicionaisObjs = adicionaisSelIdx.map(i => window.adicionais[i]).filter(Boolean);
+
   const adicionaisText = adicionaisObjs
     .map(a => `${a.nome} - R$ ${Number(a.valor).toFixed(2)}`)
     .join(", ") || "-";
@@ -129,19 +128,36 @@ formPedido?.addEventListener("submit", e => {
 
   const pedido = {
     cliente: clienteInfo,
-    pizza,
-    bebida,
+    pizza: pizzaObj ? `${pizzaObj.sabor} - R$ ${Number(pizzaObj.valor).toFixed(2)}` : "-",
+    bebida: bebidaObj ? `${bebidaObj.nome} - R$ ${Number(bebidaObj.valor).toFixed(2)}` : "-",
     adicionais: adicionaisText,
     total,
     hora,
   };
 
-  // Salvar e atualizar
+  // ======== Enviar para a cozinha ========
+  let pedidosCozinha = JSON.parse(localStorage.getItem("pedidosCozinha") || "[]");
+  pedidosCozinha.push({
+    id: Date.now(),
+    cliente: clienteInfo,
+    pizza: pizzaObj ? pizzaObj.sabor : "-",
+    bebida: bebidaObj ? bebidaObj.nome : "-",
+    adicionais: adicionaisText,
+    total,
+    hora,
+    endereco: modoCadastrado
+      ? (window.clientes.find(c => c.cpf === document.getElementById("cpfBusca").value)?.end || "-")
+      : document.getElementById("enderecoPedido").value.trim(),
+    status: "Em preparo"
+  });
+  localStorage.setItem("pedidosCozinha", JSON.stringify(pedidosCozinha));
+
+  // ======== Salvar e atualizar localmente ========
   window.pedidosEmAndamento.push(pedido);
   salvarPedidosEmAndamento();
   renderizarPedidosEmAndamento();
 
-  // Enviar pro histórico (se existir função)
+  // ======== Adicionar ao histórico (se existir) ========
   if (typeof adicionarHistorico === "function") {
     adicionarHistorico({
       cliente: pedido.cliente,
@@ -157,10 +173,10 @@ formPedido?.addEventListener("submit", e => {
   dadosClienteDiv.textContent = "";
   if (typeof atualizarSelectsCardapio === "function") atualizarSelectsCardapio();
   if (totalPedidoSpan) totalPedidoSpan.textContent = "0.00";
-  toast("Pedido registrado!");
+  toast("Pedido registrado e enviado para a cozinha!");
 });
 
-// Renderizar pedidos na tela
+// ======== Renderizar pedidos locais ========
 function renderizarPedidosEmAndamento() {
   if (!listaPedidos) return;
   listaPedidos.innerHTML = "";

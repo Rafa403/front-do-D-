@@ -1,4 +1,4 @@
-// cardapio.js — versão limpa e funcional
+// cardapio.js — versão atualizada com botão ✎ de edição
 
 const listaPizzas = document.getElementById("listaPizzas");
 const listaBebidas = document.getElementById("listaBebidas");
@@ -8,6 +8,7 @@ window.pizzas = window.pizzas || [];
 window.bebidas = window.bebidas || [];
 window.adicionais = window.adicionais || [];
 
+// ======== Funções de salvar e carregar ========
 function salvarCardapio() {
   localStorage.setItem("pizzas", JSON.stringify(pizzas));
   localStorage.setItem("bebidas", JSON.stringify(bebidas));
@@ -21,6 +22,7 @@ function carregarCardapio() {
   atualizarCardapio();
 }
 
+// ======== Atualizar listas ========
 function atualizarCardapio() {
   atualizarLista(listaPizzas, pizzas, "sabor");
   atualizarLista(listaBebidas, bebidas, "nome");
@@ -31,6 +33,7 @@ function atualizarCardapio() {
 function atualizarLista(elemento, lista, prop) {
   if (!elemento) return;
   elemento.innerHTML = "";
+
   lista.forEach((item, i) => {
     const li = document.createElement("li");
 
@@ -38,11 +41,21 @@ function atualizarLista(elemento, lista, prop) {
     span.textContent = `${item[prop]} - R$ ${Number(item.valor).toFixed(2)}`;
     li.appendChild(span);
 
-    const btn = document.createElement("button");
-    btn.className = "btn-remove";
-    btn.textContent = "×";
-    btn.type = "button";
-    btn.addEventListener("click", () => {
+    // Botão Editar (✎)
+    const btnEdit = document.createElement("button");
+    btnEdit.className = "btn-edit";
+    btnEdit.type = "button";
+    btnEdit.textContent = "✎";
+    btnEdit.title = "Editar valor";
+    btnEdit.addEventListener("click", () => editarItem(lista, i, prop));
+
+    // Botão Remover (×)
+    const btnRemove = document.createElement("button");
+    btnRemove.className = "btn-remove";
+    btnRemove.type = "button";
+    btnRemove.textContent = "×";
+    btnRemove.title = "Remover item";
+    btnRemove.addEventListener("click", () => {
       if (confirm(`Remover ${item[prop]}?`)) {
         lista.splice(i, 1);
         salvarCardapio();
@@ -50,9 +63,26 @@ function atualizarLista(elemento, lista, prop) {
       }
     });
 
-    li.appendChild(btn);
+    li.appendChild(btnEdit);
+    li.appendChild(btnRemove);
     elemento.appendChild(li);
   });
+}
+
+// ======== Editar valor ========
+function editarItem(lista, index, prop) {
+  const item = lista[index];
+  const novoValor = prompt(`Editar valor de ${item[prop]}:`, item.valor);
+  if (novoValor === null) return;
+  const valorNum = parseFloat(novoValor);
+  if (isNaN(valorNum) || valorNum < 0) {
+    alert("Informe um valor válido.");
+    return;
+  }
+  item.valor = valorNum;
+  salvarCardapio();
+  atualizarCardapio();
+  alert("Valor atualizado com sucesso!");
 }
 
 // ======== FORM PIZZAS ========
@@ -134,3 +164,6 @@ window.atualizarSelectsCardapio = function () {
     adicionalSel.appendChild(opt);
   });
 };
+
+// ======== Inicialização ========
+carregarCardapio();

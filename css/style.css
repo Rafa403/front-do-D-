@@ -201,3 +201,27 @@ ul li span {
   font-style: italic;
   color: #aaa;
 }
+/* ======== BOTÃO DE EDITAR (✎) ======== */
+.btn-edit {
+  background: transparent;
+  color: #aaa;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.2s;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.btn-edit:hover {
+  color: #fff;
+  background: #3498db; /* azul para diferenciar */
+  transform: scale(1.1);
+}

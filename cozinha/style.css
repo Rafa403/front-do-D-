@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background: #8b0000;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  section {
+    background: #1e1e1e;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  }
+  
+  h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: .5rem;
+    color: #f1f1f1;
+  }
+  
+  .pedido {
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #181818;
+  }
+  
+  .pedido strong {
+    color: #fff;
+  }
+  
+  .botoes {
+    margin-top: .8rem;
+    display: flex;
+    gap: .5rem;
+  }
+  
+  button {
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: 0.2s;
+  }
+  
+  .btn-pronto {
+    background: #2e7d32;
+  }
+  
+  .btn-pronto:hover {
+    background: #388e3c;
+  }
+  
+  .btn-cancelar {
+    background: #c62828;
+  }
+  
+  .btn-cancelar:hover {
+    background: #d32f2f;
+  }
+  
+  .historico-pedido {
+    border-left: 8px solid;
+    padding-left: .8rem;
+    margin-bottom: .5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .historico-pedido:hover {
+    background: #2a2a2a;
+  }
+  
+  .verde {
+    border-color: #2e7d32;
+    background: #1b2e1d;
+  }
+  
+  .vermelho {
+    border-color: #c62828;
+    background: #2b1a1a;
+  }
+  
+  .vazio {
+    text-align: center;
+    color: #aaa;
+    font-style: italic;
+    margin-top: .5rem;
+  }
+  
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+  }
+  
+  .modal-content {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+  
+  .fechar {
+    color: #888;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .fechar:hover {
+    color: #fff;
+  }
