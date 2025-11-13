@@ -55,6 +55,7 @@ btnBuscar?.addEventListener("click", () => {
 function salvarPedidosEmAndamento() {
   localStorage.setItem("pedidosEmAndamento", JSON.stringify(window.pedidosEmAndamento));
 }
+
 function carregarPedidosEmAndamento() {
   window.pedidosEmAndamento = JSON.parse(localStorage.getItem("pedidosEmAndamento") || "[]");
   renderizarPedidosEmAndamento();
@@ -120,12 +121,13 @@ formPedido?.addEventListener("submit", e => {
   const adicionaisObjs = adicionaisSelIdx.map(i => window.adicionais[i]).filter(Boolean);
 
   const adicionaisText = adicionaisObjs
-    .map(a => `${a.nome} - R$ ${Number(a.valor).toFixed(2)}`)
+    .map(a => `${a.nome}`)
     .join(", ") || "-";
 
   const hora = new Date().toLocaleTimeString();
   const total = parseFloat(totalPedidoSpan?.textContent || "0") || 0;
 
+  // Objeto usado no painel principal
   const pedido = {
     cliente: clienteInfo,
     pizza: pizzaObj ? `${pizzaObj.sabor} - R$ ${Number(pizzaObj.valor).toFixed(2)}` : "-",
@@ -135,29 +137,41 @@ formPedido?.addEventListener("submit", e => {
     hora,
   };
 
-  // ======== Enviar para a cozinha ========
+  // ======== Enviar para a cozinha (NOMES CORRETOS) ========
   let pedidosCozinha = JSON.parse(localStorage.getItem("pedidosCozinha") || "[]");
+
   pedidosCozinha.push({
     id: Date.now(),
-    cliente: clienteInfo,
+
+    cliente: modoCadastrado
+      ? window.clientes.find(c =>
+          c.cpf === document.getElementById("cpfBusca").value.trim()
+        ).nome
+      : document.getElementById("nomePedido").value.trim(),
+
+    endereco: modoCadastrado
+      ? window.clientes.find(c =>
+          c.cpf === document.getElementById("cpfBusca").value.trim()
+        ).end
+      : document.getElementById("enderecoPedido").value.trim(),
+
     pizza: pizzaObj ? pizzaObj.sabor : "-",
     bebida: bebidaObj ? bebidaObj.nome : "-",
     adicionais: adicionaisText,
-    total,
-    hora,
-    endereco: modoCadastrado
-      ? (window.clientes.find(c => c.cpf === document.getElementById("cpfBusca").value)?.end || "-")
-      : document.getElementById("enderecoPedido").value.trim(),
+    total: total,
+    hora: hora,
     status: "Em preparo"
   });
+
   localStorage.setItem("pedidosCozinha", JSON.stringify(pedidosCozinha));
+  // ============================================================
 
   // ======== Salvar e atualizar localmente ========
   window.pedidosEmAndamento.push(pedido);
   salvarPedidosEmAndamento();
   renderizarPedidosEmAndamento();
 
-  // ======== Adicionar ao histórico (se existir) ========
+  // ======== Histórico ========
   if (typeof adicionarHistorico === "function") {
     adicionarHistorico({
       cliente: pedido.cliente,
@@ -207,4 +221,4 @@ function renderizarPedidosEmAndamento() {
   });
 }
 
-window.carregarPedidosEmAndamento = carregarPedidosEmAndamento;
+window.carregarPedidosEmAndamento = carregarPedidosEnAndamento;

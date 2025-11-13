@@ -14,6 +14,13 @@ function salvarPedidos() {
   localStorage.setItem("pedidosCozinha", JSON.stringify(pedidos));
 }
 
+// Atualização automática a cada 3 segundos
+setInterval(() => {
+  pedidos = JSON.parse(localStorage.getItem('pedidosCozinha')) || [];
+  renderPedidos();
+  renderHistorico();
+}, 3000);
+
 function renderPedidos() {
   listaPedidos.innerHTML = "";
   pedidos.forEach(p => {
@@ -64,5 +71,9 @@ window.addEventListener("storage", (e) => {
   }
 });
 
+
 renderPedidos();
 carregarHistorico();
+document.getElementById("btnVoltar")?.addEventListener("click", () => {
+  window.location.href = "../index.html";
+});

@@ -225,3 +225,20 @@ ul li span {
   background: #3498db; /* azul para diferenciar */
   transform: scale(1.1);
 }
+.btn-padrao {
+  background: var(--cor-primaria);
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  width: 100%;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn-padrao:hover {
+  filter: brightness(1.2);
+}

@@ -3,8 +3,11 @@
 const links = document.querySelectorAll(".sidebar a");
 const sections = document.querySelectorAll(".content");
 
-// ======== NAVEGAÇÃO ENTRE SEÇÕES ========
 links.forEach(link => {
+
+  // Não intercepta o botão da cozinha
+  if (link.classList.contains("cozinha-link")) return;
+
   link.addEventListener("click", e => {
     e.preventDefault();
     links.forEach(l => l.classList.remove("active"));
@@ -14,7 +17,6 @@ links.forEach(link => {
   });
 });
 
-// ======== TOAST (mensagem temporária) ========
 function toast(msg) {
   const div = document.createElement("div");
   div.className = "toast";
@@ -40,21 +42,19 @@ function toast(msg) {
     setTimeout(() => div.remove(), 300);
   }, 3000);
 }
-window.toast = toast; // disponível globalmente
+window.toast = toast;
 
-// ======== INICIALIZAÇÃO GLOBAL ========
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Carregar dados de todos os módulos, se existirem
+
   if (typeof carregarClientes === "function") carregarClientes();
   if (typeof carregarCardapio === "function") carregarCardapio();
   if (typeof carregarEstoque === "function") carregarEstoque();
   if (typeof carregarHistorico === "function") carregarHistorico();
   if (typeof carregarPedidosEmAndamento === "function") carregarPedidosEmAndamento();
 
-  // Atualiza selects de pedido (pizza/bebida/adicional)
   if (typeof atualizarSelectsCardapio === "function") atualizarSelectsCardapio();
 
-  // Exportar histórico CSV
   const exportBtn = document.getElementById("exportCsv");
   if (exportBtn) {
     exportBtn.addEventListener("click", () => {
@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Limpar histórico
   const limparHistBtn = document.getElementById("limparHistorico");
   if (limparHistBtn) {
     limparHistBtn.addEventListener("click", () => {
